@@ -1307,15 +1307,11 @@
         </div>
         <div class="hero-stats">
           <div class="stat-item">
-            <span class="stat-num">95%+</span>
-            <span class="stat-label">نسبة نجاح القضايا</span>
-          </div>
-          <div class="stat-item">
             <span class="stat-num">500+</span>
             <span class="stat-label">قضية ناجحة</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">+10</span>
+            <span class="stat-num">7+</span>
             <span class="stat-label">سنوات خبرة</span>
           </div>
         </div>
@@ -1324,8 +1320,8 @@
         <div class="hero-float-1">
           <div class="float-icon">⚖️</div>
           <div>
-            <div class="float-text">نسبة نجاح القضايا</div>
-            <div class="float-num">95%+</div>
+            <div class="float-text">قضايا ناجحة</div>
+            <div class="float-num">500+</div>
           </div>
         </div>
         <div class="hero-card">
@@ -1336,7 +1332,7 @@
             <span class="tag">إصابات العمل</span>
             <span class="tag">حوادث السير</span>
             <span class="tag">إصابات شخصية</span>
-            <span class="tag">تعويضات المدارس</span>
+            <span class="tag">تعويضات طلاب المدارس</span>
           </div>
           <div class="hero-card-metric">
             <span class="metric-label">📍 الموقع</span>
@@ -1354,8 +1350,8 @@
         <div class="hero-float-2">
           <div class="float-icon">🏆</div>
           <div>
-            <div class="float-text">نسبة النجاح</div>
-            <div class="float-num">95%+</div>
+            <div class="float-text">سنوات خبرة</div>
+            <div class="float-num">7+</div>
           </div>
         </div>
       </div>
@@ -1372,7 +1368,7 @@
           <div class="about-image-overlay"></div>
         </div>
         <div class="about-badge">
-          <strong>+10</strong>
+          <strong>7+</strong>
           سنوات في القدس
         </div>
         <div class="about-corner-2"></div>
@@ -1384,7 +1380,7 @@
           <span class="gold">نحن نمثّل حقوقهم</span>
         </h2>
         <p class="about-text">
-          مكتب المحامي محمد الشريف هو مكتب محاماة متخصص يقع في قلب القدس، شارع صلاح الدين. تأسس المكتب على قناعة راسخة: أن كل شخص أُصيب بسبب إهمال الآخرين يستحق تعويضاً عادلاً وكاملاً.
+          مكتب المحامي محمد الشريف هو مكتب محاماة متخصص يقع في قلب القدس، شارع صلاح الدين، عمارة صندوقة. تأسس المكتب على قناعة راسخة: أن كل شخص أُصيب بسبب إهمال الآخرين يستحق تعويضاً عادلاً وكاملاً.
         </p>
         <p class="about-text">
           نتخصص في قضايا تعويضات الأضرار الجسدية — من إصابات العمل التي يرفضها التأمين الوطني، إلى حوادث السير والإصابات الشخصية. نؤمن بأن الزاوية القانونية الصحيحة تُحوّل الرفض إلى انتصار.
@@ -1701,24 +1697,26 @@
       </div>
       <div class="contact-form" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
         <div class="form-title">📋 أرسل لنا تفاصيل قضيتك</div>
-        <form id="contactForm" onsubmit="submitForm(event)">
+        <form id="contactForm" action="https://formspree.io/f/adv.mohamedsh@gmail.com" method="POST" onsubmit="submitForm(event)">
+          <input type="hidden" name="_subject" value="طلب استشارة جديدة - مكتب المحامي محمد الشريف" />
+          <input type="hidden" name="_language" value="ar" />
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">الاسم الكامل *</label>
-              <input type="text" class="form-input" placeholder="محمد أحمد" required />
+              <input type="text" name="name" class="form-input" placeholder="محمد أحمد" required />
             </div>
             <div class="form-group">
               <label class="form-label">رقم الهاتف *</label>
-              <input type="tel" class="form-input" placeholder="05X-XXXXXXX" required />
+              <input type="tel" name="phone" class="form-input" placeholder="05X-XXXXXXX" required />
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">البريد الإلكتروني</label>
-            <input type="email" class="form-input" placeholder="example@email.com" />
+            <input type="email" name="email" class="form-input" placeholder="example@email.com" />
           </div>
           <div class="form-group">
             <label class="form-label">نوع القضية *</label>
-            <select class="form-select" required>
+            <select name="case_type" class="form-select" required>
               <option value="">اختر نوع القضية</option>
               <option>إصابة عمل</option>
               <option>حادث سير</option>
@@ -1730,7 +1728,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">وصف مختصر للقضية *</label>
-            <textarea class="form-textarea" placeholder="اشرح لنا ما حدث بشكل مختصر..." required></textarea>
+            <textarea name="message" class="form-textarea" placeholder="اشرح لنا ما حدث بشكل مختصر..." required></textarea>
           </div>
           <button type="submit" class="form-submit">
             📨 إرسال الطلب — الاستشارة مجانية
@@ -1999,22 +1997,38 @@
     }
     showChart('distribution');
 
-    // Form submit
+    // Form submit via Formspree
     function submitForm(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
+      const form = e.target;
+      const btn = form.querySelector('.form-submit');
       btn.textContent = '⏳ جاري الإرسال...';
       btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = '✅ تم الإرسال';
-        document.getElementById('successMsg').style.display = 'block';
-        e.target.reset();
-        setTimeout(() => {
-          btn.textContent = '📨 إرسال الطلب — الاستشارة مجانية';
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          btn.textContent = '✅ تم الإرسال بنجاح';
+          document.getElementById('successMsg').style.display = 'block';
+          form.reset();
+          setTimeout(() => {
+            btn.textContent = '📨 إرسال الطلب — الاستشارة مجانية';
+            btn.disabled = false;
+            document.getElementById('successMsg').style.display = 'none';
+          }, 5000);
+        } else {
+          btn.textContent = '❌ حدث خطأ، حاول مرة أخرى';
           btn.disabled = false;
-          document.getElementById('successMsg').style.display = 'none';
-        }, 5000);
-      }, 1500);
+        }
+      })
+      .catch(() => {
+        btn.textContent = '❌ تعذّر الإرسال، تحقق من الاتصال بالإنترنت';
+        btn.disabled = false;
+      });
     }
   </script>
 </body>
