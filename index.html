@@ -179,22 +179,27 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
       scroll-behavior: smooth;
-      overflow-x: hidden;
-      max-width: 100%;
+      overflow-x: hidden !important;
+      overflow-y: auto;
     }
     body {
       font-family: var(--font);
       background: var(--black);
       color: var(--white);
-      overflow-x: hidden;
+      overflow-x: hidden !important;
       line-height: 1.7;
-      max-width: 100%;
       width: 100%;
+      position: relative;
     }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
-    section, header, footer, nav, div {
+
+    /* ===== منع الانزياح الأفقي بشكل مطلق ===== */
+    * {
       max-width: 100%;
+    }
+    .hero-bg, .hero-pattern {
+      max-width: none;
     }
 
     /* ===== Scrollbar ===== */
@@ -685,7 +690,7 @@
     .services { background: var(--black); }
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
       gap: 24px;
       max-width: 1200px;
       margin: 0 auto;
@@ -835,7 +840,7 @@
     .testimonials { background: var(--dark); }
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
       gap: 24px;
       max-width: 1200px;
       margin: 0 auto;
@@ -1249,6 +1254,8 @@
       .results-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -1264,10 +1271,20 @@
         border-bottom: 1px solid rgba(201,168,76,0.2);
         gap: 16px;
       }
-      section { padding: 70px 5%; }
+      section { padding: 70px 4%; }
       .form-row { grid-template-columns: 1fr; }
       .about-values { grid-template-columns: 1fr; }
       .hero-float-1, .hero-float-2 { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .about-corner, .about-corner-2 { display: none; }
+      .contact-item { padding: 12px 14px; }
+      .contact-item:hover { transform: none; }
+      .case-card:hover { transform: none; }
 
       /* ===== إصلاح الانزياح الأفقي على الهاتف ===== */
       .hero-content {
@@ -1340,6 +1357,43 @@
       }
       .service-card, .testimonial-card, .case-card {
         padding: 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-legal {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+      .chart-container {
+        padding: 16px;
+      }
+      .chart-wrapper {
+        height: 220px;
+      }
+      .contact-title {
+        font-size: 24px;
+      }
+      .about-title {
+        font-size: 26px;
+      }
+      section {
+        padding: 60px 4%;
+      }
+      .navbar {
+        padding: 10px 4%;
+      }
+      .nav-logo-text {
+        font-size: 11px;
+      }
+      .nav-logo-sub {
+        display: none;
       }
     }
   </style>
@@ -1874,7 +1928,7 @@
   </footer>
 
   <!-- ===== WhatsApp Float ===== -->
-  <a href="https://wa.me/972525711136" target="_blank" class="whatsapp-float" title="تواصل عبر واتساب">
+  <a href="https://wa.me/0097225711136" target="_blank" class="whatsapp-float" title="تواصل عبر واتساب">
     💬
   </a>
 
@@ -2114,7 +2168,7 @@ ${message}
 تم الإرسال عبر الموقع الإلكتروني`;
 
       const encodedMsg = encodeURIComponent(whatsappMsg);
-      const whatsappURL = `https://wa.me/972525711136?text=${encodedMsg}`;
+      const whatsappURL = `https://wa.me/0097225711136?text=${encodedMsg}`;
 
       setTimeout(() => {
         btn.textContent = '✅ تم الإرسال بنجاح';
