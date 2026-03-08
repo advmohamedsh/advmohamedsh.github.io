@@ -1701,9 +1701,8 @@
       </div>
       <div class="contact-form" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
         <div class="form-title">📋 أرسل لنا تفاصيل قضيتك</div>
-        <form id="contactForm" action="https://formspree.io/f/adv.mohamedsh@gmail.com" method="POST" onsubmit="submitForm(event)">
-          <input type="hidden" name="_subject" value="طلب استشارة جديدة - مكتب المحامي محمد الشريف" />
-          <input type="hidden" name="_language" value="ar" />
+        <form id="contactForm" onsubmit="submitForm(event)">
+
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">الاسم الكامل *</label>
@@ -2001,38 +2000,51 @@
     }
     showChart('distribution');
 
-    // Form submit via Formspree
+    // Form submit via WhatsApp
     function submitForm(e) {
       e.preventDefault();
       const form = e.target;
       const btn = form.querySelector('.form-submit');
+
+      const name = form.querySelector('[name="name"]').value.trim();
+      const phone = form.querySelector('[name="phone"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const caseType = form.querySelector('[name="case_type"]').value.trim();
+      const message = form.querySelector('[name="message"]').value.trim();
+
+      if (!name || !phone || !caseType || !message) {
+        alert('يرجى تعبئة جميع الحقول المطلوبة');
+        return;
+      }
+
       btn.textContent = '⏳ جاري الإرسال...';
       btn.disabled = true;
-      const data = new FormData(form);
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          btn.textContent = '✅ تم الإرسال بنجاح';
-          document.getElementById('successMsg').style.display = 'block';
-          form.reset();
-          setTimeout(() => {
-            btn.textContent = '📨 إرسال الطلب — الاستشارة مجانية';
-            btn.disabled = false;
-            document.getElementById('successMsg').style.display = 'none';
-          }, 5000);
-        } else {
-          btn.textContent = '❌ حدث خطأ، حاول مرة أخرى';
+
+      const whatsappMsg = `🔔 *طلب استشارة جديدة*
+
+👤 *الاسم:* ${name}
+📞 *الهاتف:* ${phone}
+${email ? `📧 *البريد:* ${email}\n` : ''}⚖️ *نوع القضية:* ${caseType}
+📝 *تفاصيل القضية:*
+${message}
+
+---
+تم الإرسال عبر الموقع الإلكتروني`;
+
+      const encodedMsg = encodeURIComponent(whatsappMsg);
+      const whatsappURL = `https://wa.me/972525711136?text=${encodedMsg}`;
+
+      setTimeout(() => {
+        btn.textContent = '✅ تم الإرسال بنجاح';
+        document.getElementById('successMsg').style.display = 'block';
+        form.reset();
+        window.open(whatsappURL, '_blank');
+        setTimeout(() => {
+          btn.textContent = '📨 إرسال الطلب — الاستشارة مجانية';
           btn.disabled = false;
-        }
-      })
-      .catch(() => {
-        btn.textContent = '❌ تعذّر الإرسال، تحقق من الاتصال بالإنترنت';
-        btn.disabled = false;
-      });
+          document.getElementById('successMsg').style.display = 'none';
+        }, 5000);
+      }, 800);
     }
   </script>
 </body>
